@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import './login.css';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer, toast } from 'react-toastify';
 import '../mobile.css';
+import { loginUser } from '../../redux/actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const [values, setValues] = useState({
     username: '',
     password: '',
   });
+  
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { user, loading, error } = auth;
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(values));
+  };
 
-  const onChangeHandler = name => e => {
-      setValues({ ...values, [name]: e.target.value })
+  const onChangeHandler = (name) => (e) => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+  useEffect(() => {
+    toast.error(error, {
+      position: 'bottom-center',
+    });
+  }, [error]);
+
+  if(user !== null){
+    return <Redirect to='/profile' />
   }
+
 
   return (
     <div className="login">
@@ -36,7 +58,12 @@ const Login = () => {
               placeholder="Password"
               required
             />
-            <input type="submit" value="Log in" />
+            <span
+              className="btn-block btn mb-1 btn-outline-primary"
+              onClick={onSubmitHandler}
+            >
+              Login
+            </span>
           </form>
           <span className="login__divider">or</span>
           <a href="#!" className="login__link">
@@ -68,6 +95,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />  
     </div>
   );
 };

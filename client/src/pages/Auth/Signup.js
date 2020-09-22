@@ -3,8 +3,8 @@ import './login.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { Link } from 'react-router-dom';
-import { signup } from '../../redux/actions/authActions';
+import { Link, Redirect } from 'react-router-dom';
+import { signupUser } from '../../redux/actions/authActions';
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -17,10 +17,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { user, loading, error } = auth;
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(signup(values));
+    dispatch(signupUser(values));
   };
 
   const onChangeHandler = (name) => (e) => {
@@ -31,6 +30,11 @@ const Login = () => {
       position: 'bottom-center',
     });
   }, [error]);
+
+  if (user !== null) {
+    return <Redirect to="/profile" />;
+  }
+
   return (
     <div className="login">
       <div className="login__column">
@@ -83,8 +87,7 @@ const Login = () => {
               className="btn-block btn mb-1 btn-outline-primary"
               onClick={onSubmitHandler}
             >
-              {' '}
-              Signup{' '}
+              Signup
             </span>
           </form>
           <span className="login__divider">or</span>
