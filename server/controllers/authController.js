@@ -14,15 +14,15 @@ exports.signup = asyncHandler(async (req, res, next) => {
 });
 
 exports.login = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  // validate password and email
-  if (!email || !password) {
-    return next(new ErrorResponse('Please add an email and a password', 400));
+  // validate password and username
+  if (!username || !password) {
+    return next(new ErrorResponse('Please add an username and a password', 400));
   }
 
   // check for user
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ username }).select('+password');
   if (!user) {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
