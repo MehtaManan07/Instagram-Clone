@@ -73,7 +73,7 @@
     margin-bottom: 5px;
   }
   
-  .login__form input[type="submit"] {
+  .login__form span[type="submit"] {
     background-color: #3f99ed;
     border: 0;
     padding: 5px;

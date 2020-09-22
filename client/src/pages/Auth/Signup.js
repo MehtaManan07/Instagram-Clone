@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import './login.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { Link } from 'react-router-dom';
+import { signup } from '../../redux/actions/authActions';
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -10,17 +14,35 @@ const Login = () => {
     username: '',
     password: '',
   });
-  const onChangeHandler = name => e => {
-    setValues({ ...values, [name]: e.target.value })
-  }
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { user, loading, error } = auth;
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signup(values));
+  };
+
+  const onChangeHandler = (name) => (e) => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+  useEffect(() => {
+    toast.error(error, {
+      position: 'bottom-center',
+    });
+  }, [error]);
   return (
     <div className="login">
       <div className="login__column">
-        <img src="/images/phoneImage.png" className="login__phone" />
+        <img
+          src="/images/phoneImage.png"
+          className="login__phone"
+          alt="phone"
+        />
       </div>
       <div className="login__column">
         <div className="login__box">
-          <img src="/images/loginLogo.png" className="login__logo" />
+          <img src="/images/loginLogo.png" className="login__logo" alt="logo" />
           <form className="login__form">
             <input
               type="text"
@@ -57,14 +79,20 @@ const Login = () => {
               placeholder="Confirm Password"
               required
             />
-            <input type="submit" value="Log in" />
+            <span
+              className="btn-block btn mb-1 btn-outline-primary"
+              onClick={onSubmitHandler}
+            >
+              {' '}
+              Signup{' '}
+            </span>
           </form>
           <span className="login__divider">or</span>
-          <a href="#" className="login__link">
+          <a href="#!" className="login__link">
             <i className="btn fa fa-facebook" />
             Log in with Facebook
           </a>
-          <a href="#" className="login__link login__link--small">
+          <a href="#!" className="login__link login__link--small">
             Forgot password
           </a>
         </div>
@@ -89,6 +117,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 };

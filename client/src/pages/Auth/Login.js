@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.css';
+import '../mobile.css';
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -15,11 +16,11 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login__column">
-        <img src="/images/phoneImage.png" className="login__phone" />
+        <img src="/images/phoneImage.png" className="login__phone" alt="phone" />
       </div>
       <div className="login__column">
         <div className="login__box">
-          <img src="/images/loginLogo.png" className="login__logo" />
+          <img src="/images/loginLogo.png" className="login__logo" alt='logo' />
           <form className="login__form">
             <input
               type="text"
@@ -38,11 +39,11 @@ const Login = () => {
             <input type="submit" value="Log in" />
           </form>
           <span className="login__divider">or</span>
-          <a href="#" className="login__link">
+          <a href="#!" className="login__link">
             <i className="btn fa fa-facebook" />
             Log in with Facebook
           </a>
-          <a href="#" className="login__link login__link--small">
+          <a href="#!" className="login__link login__link--small">
             Forgot password
           </a>
         </div>
