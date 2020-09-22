@@ -13,7 +13,7 @@ const Landing = () => {
               marginBottom: '1rem',
             }}
           >
-            SOCIOGRAM
+            INSTAGRAM
           </h1>
           <p className="lead">
             A Social Media So Desirable, feel the social experience{' '}

@@ -120,7 +120,7 @@ const sendTokenResponse = (statusCode, user, res) => {
 
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
-  res.cookie('sociogram1', token, cookieOptions);
+  res.cookie('instagram', token, cookieOptions);
 
   user.password = undefined;
   res.status(statusCode).json({
@@ -131,6 +131,6 @@ const sendTokenResponse = (statusCode, user, res) => {
 };
 
 exports.logout = asyncHandler(async (req, res) => {
-  res.clearCookie('sociogram1');
+  res.clearCookie('instagram1');
   res.status(200).json({ success: true });
 });
