@@ -30,6 +30,9 @@ app.use(cookieParser());
 connectDB();
 
 // 3) ROUTES
+app.use('/api/v1/auth', require('./server/routes/authRoutes'))
+
+
 if(process.env.NODE_ENV === 'development'){
   app.all('*', (req, res, next) => {
     next(new ErrorResponse(` Can't find ${req.originalUrl} on this server`, 404));
