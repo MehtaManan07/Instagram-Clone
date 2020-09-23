@@ -5,11 +5,12 @@ const postSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A post must have a name'],
-    unique: true,
     trim: true,
-    maxlength: [39, 'A tour name must have less than 40 characters'],
-    minlength: [10, 'A tour name must have more than 10 characters'],
-    // validate: [validator.isAlpha, "Tour name must only contain characters"],
+  },
+  description: {
+    type: String,
+    required: [true, 'A post must have a description'],
+    minlength: 5
   },
   slug: String,
   image: {
@@ -38,5 +39,10 @@ const postSchema = new mongoose.Schema({
   ],
 });
 
-const Post = mongoose.model('Post',postSchema)
-module.exports = Post
+postSchema.pre(/^find/, function (next) {
+  this.populate('user', ' name photo username ');
+  next()
+});
+
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;

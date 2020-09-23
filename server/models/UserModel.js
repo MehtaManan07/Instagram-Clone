@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please tell us your name'],
-    trim: true,
   },
   username: {
     type: String,
@@ -29,7 +28,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  photo: {
+  profileImage: {
     type: String,
     default:
       'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png',
