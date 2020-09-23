@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfilePosts = () => {
+const ProfilePost = () => {
   return (
     <div>
     <hr/>
@@ -21,4 +21,4 @@ const ProfilePosts = () => {
   );
 };
 
-export default ProfilePosts;
+export default ProfilePost;
