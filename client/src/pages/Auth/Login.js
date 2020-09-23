@@ -43,7 +43,7 @@ const Login = () => {
       <div className="login__column">
         <div className="login__box">
           <img src="/images/loginLogo.png" className="login__logo" alt='logo' />
-          <form className="login__form">
+          <form onSubmit={onSubmitHandler} className="login__form">
             <input
               type="text"
               value={values.username}
