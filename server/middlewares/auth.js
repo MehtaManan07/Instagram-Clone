@@ -11,12 +11,13 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
-  } else if (req.cookies.jwtNatour) {
-    token = req.cookies.jwtNatour;
+  } else if (req.cookies.instagram) {
+    token = req.cookies.instagram;
   }
 
   // Make sure token is send;
   if (!token) {
+    console.log(req.cookies,'\n')
     return next(
       new ErrorResponse('Not authorized to access the resource', 401)
     );
