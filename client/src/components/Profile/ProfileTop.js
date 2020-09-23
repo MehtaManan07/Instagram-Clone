@@ -1,16 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-const ProfileTop = () => {
-    return (
-        <div>
-             <header className="profile__header">
+const ProfileTop = ({ user, loading }) => {
+  return (
+    <div>
+    {user === null ? <></> : (
+
+      <header className="profile__header">
         <div className="profile__column">
-          <img src="/images/avatar.jpg" />
+          <img src='/images/avatar.jpg' alt='profile pic' />
         </div>
         <div className="profile__column">
           <div className="profile__title">
-            <h3 className="profile__username">serranoarevalo</h3>
-            <span className='btn btn-outline-primary'>Edit profile</span>
+            <h3 className="profile__username">{user.username}</h3>
+            <span className="btn btn-outline-primary">Edit profile</span>
             <i className="fa fa-cog fa-lg"></i>
           </div>
           <ul className="profile__stats">
@@ -18,21 +20,22 @@ const ProfileTop = () => {
               <span className="stat__number">333</span> posts
             </li>
             <li className="profile__stat">
-              <span className="stat__number">1234</span> followers
+              <span className="stat__number">{user.followers.length}</span> followers
             </li>
             <li className="profile__stat">
-              <span className="stat__number">36</span> following
+              <span className="stat__number">{user.following.length}</span> following
             </li>
           </ul>
           <p className="profile__bio">
-            <span className="profile__full-name">Nicolás Serrano Arévalo</span>
-            <br/>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam aspernatur aliquam quia?
+            <span className="profile__full-name">{user.name}</span>
+            <br />
+            {user.bio}
           </p>
         </div>
       </header>
-        </div>
-    )
-}
+    )}
+    </div>
+  );
+};
 
-export default ProfileTop
+export default ProfileTop;

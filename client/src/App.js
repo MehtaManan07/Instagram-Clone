@@ -13,7 +13,8 @@ function App() {
   useEffect(() => {
     if(localStorage.getItem('Instagram1')){
       dispatch(getUser())
-    }
+      }
+      // eslint-disable-next-line
   },[])
   return (
     <>

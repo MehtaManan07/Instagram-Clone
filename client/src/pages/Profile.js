@@ -1,14 +1,16 @@
 import React from 'react';
-import './profile.css'
+import './profile.css';
 import ProfilePosts from '../components/Profile/ProfilePosts';
 import ProfileTop from '../components/Profile/ProfileTop';
 
-import {} from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <main id="profile">
-     <ProfileTop />
+      <ProfileTop user={auth.user} />
       <section className="profile__photos">
         <ProfilePosts />
       </section>

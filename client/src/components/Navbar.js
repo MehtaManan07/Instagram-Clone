@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navigation">
       <div className="navigation__column">
         <a href="feed.html">
-          <img src="/images/logo.png" />
+          <img src="/images/logo.png" alt='navbarpic' />
         </a>
       </div>
       <div className="navigation__column">

@@ -15,7 +15,7 @@ const Login = () => {
   
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const { user, loading, error } = auth;
+  const { user, error } = auth;
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(loginUser(values));
