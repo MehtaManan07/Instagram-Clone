@@ -24,6 +24,8 @@
 }
 
 .profile__column:first-child img {
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   margin-right: 100px;
   transform-style: preserve-3d;

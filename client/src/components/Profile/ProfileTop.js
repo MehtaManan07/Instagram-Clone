@@ -7,7 +7,7 @@ const ProfileTop = ({ user, loading }) => {
 
       <header className="profile__header">
         <div className="profile__column">
-          <img src='/images/avatar.jpg' alt='profile pic' />
+          <img src={user.photo} alt='profile pic' />
         </div>
         <div className="profile__column">
           <div className="profile__title">
