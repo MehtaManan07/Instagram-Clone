@@ -39,12 +39,20 @@ const Navbar = (props) => {
   const guestLinks = (
     <>
       <li className="navigation__list-item">
-        <Link style={{ textDecoration: 'none' }} to="/login" className="navigation__link">
+        <Link
+          style={{ textDecoration: 'none' }}
+          to="/login"
+          className="navigation__link"
+        >
           Login
         </Link>
       </li>
       <li className="navigation__list-item">
-        <Link style={{ textDecoration: 'none' }} to="/signup" className="navigation__link">
+        <Link
+          style={{ textDecoration: 'none' }}
+          to="/signup"
+          className="navigation__link"
+        >
           Signup
         </Link>
       </li>
@@ -55,7 +63,7 @@ const Navbar = (props) => {
     <nav className="navigation fixed">
       <div className="navigation__column">
         <Link to="/">
-          <img src="images/logo.png" />
+          <img src="images/logo.png" alt="navlogo" />
         </Link>
       </div>
       {user !== null && (
@@ -66,7 +74,8 @@ const Navbar = (props) => {
       )}
       <div className="navigation__column">
         <ul className="navigations__links">
-          {user !== null ? authLinks : guestLinks}
+          {/* this check below needs to be improved later and a spinner should be used */}
+          {localStorage.getItem('Instagram1') ? authLinks : guestLinks}
         </ul>
       </div>
     </nav>
