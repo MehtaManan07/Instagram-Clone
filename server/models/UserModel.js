@@ -7,69 +7,79 @@ const slugify = require('slugify');
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name'],
-  },
-  username: {
-    type: String,
-    required: [true, 'Please tell us your username'],
-    trim: true,
-    unique: true,
-  },
-  bio: {
-    type: String,
-  },
-  email: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email'],
-  },
-  profileImage: {
-    type: String,
-    default:
-      'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png',
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 6,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      validator: function (el) {
-        return el === this.password;
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please tell us your name'],
+    },
+    username: {
+      type: String,
+      required: [true, 'Please tell us your username'],
+      trim: true,
+      unique: true,
+    },
+    bio: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email'],
+    },
+    profileImage: {
+      type: String,
+      default:
+        'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png',
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: 6,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords must be same',
       },
-      message: 'Passwords must be same',
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+    gender: {
+      type: String,
+      enum: ['Male', 'Female', 'Other'],
+    },
+    followers: [{ type: ObjectId, ref: 'User' }],
+    following: [{ type: ObjectId, ref: 'User' }],
+    slug: String,
+
+    passwordChangedAt: Date,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+
+    date: {
+      type: Date,
+      default: Date.now,
     },
   },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-  gender: {
-    type: String,
-    enum: ['Male', 'Female', 'Other'],
-  },
-  followers: [{ type: ObjectId, ref: 'User' }],
-  following: [{ type: ObjectId, ref: 'User' }],
-  slug: String,
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
 
-  passwordChangedAt: Date,
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
-
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+// Virtual populate
+userSchema.virtual('posts', {
+  ref: 'Post',
+  foreignField: 'user',
+  localField: '_id',
 });
 
 // Document Middleware, runs before .save() and .create()
@@ -131,11 +141,6 @@ userSchema.methods.getresetToken = function (next) {
   this.resetPasswordExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };
-
-userSchema.pre(/^find/, function (next) {
-  this.find({ active: true });
-  next();
-});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
   description: {
     type: String,
     required: [true, 'A post must have a description'],
-    minlength: 5
+    minlength: 5,
   },
   slug: String,
   image: {
@@ -41,7 +41,7 @@ const postSchema = new mongoose.Schema({
 
 postSchema.pre(/^find/, function (next) {
   this.populate('user', ' name photo username ');
-  next()
+  next();
 });
 
 const Post = mongoose.model('Post', postSchema);
