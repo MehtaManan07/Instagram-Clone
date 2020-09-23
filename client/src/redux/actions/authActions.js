@@ -61,7 +61,7 @@ export const getUser = () => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   try {
-    await axios.get(`/api/v1/users/logout`);
+    await axios.get(`/api/v1/auth/logout`);
     dispatch({
       type: LOGOUT_SUCCESS,
     });

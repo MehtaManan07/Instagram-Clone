@@ -1,36 +1,72 @@
 import React from 'react';
-import './Navbar.css'
+import './Navbar.css';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../redux/actions/authActions';
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { user } = auth;
+
+  const authLinks = (
+    <>
+      <li className="navigation__list-item">
+        <Link to="/explore" className="navigation__link">
+          <i className="fa fa-compass fa-lg"></i>
+        </Link>
+      </li>
+      <li className="navigation__list-item">
+        <span
+          style={{ cursor: 'pointer' }}
+          className="navigation__link"
+          onClick={() => dispatch(logoutUser())}
+        >
+          <i className="fa fa-sign-out fa-lg">Logout</i>
+        </span>
+      </li>
+      <li className="navigation__list-item">
+        <Link
+          to={`/profile/${user !== null && user._id}`}
+          className="navigation__link"
+        >
+          <i className="fa fa-user-o fa-lg"></i>
+        </Link>
+      </li>
+    </>
+  );
+
+  const guestLinks = (
+    <>
+      <li className="navigation__list-item">
+        <Link to="/login" className="navigation__link">
+          Login
+        </Link>
+      </li>
+      <li className="navigation__list-item">
+        <Link to="/signup" className="navigation__link">
+          Signup
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <nav className="navigation">
+    <nav className="navigation fixed">
       <div className="navigation__column">
-        <a href="feed.html">
-          <img src="/images/logo.png" alt='navbarpic' />
-        </a>
+        <Link to="/">
+          <img src="images/logo.png" />
+        </Link>
       </div>
-      <div className="navigation__column">
-        <i className="fa fa-search"></i>
-        <input type="text" placeholder="Search" />
-      </div>
+      {user !== null && (
+        <div className="navigation__column">
+          <i className="fa fa-search"></i>
+          <input type="text" placeholder="Search" />
+        </div>
+      )}
       <div className="navigation__column">
         <ul className="navigations__links">
-          <li className="navigation__list-item">
-            <Link to="/explore" className="navigation__link">
-              <i className="fa fa-compass fa-lg"></i>
-            </Link>
-          </li>
-          <li className="navigation__list-item">
-            <Link to="/" className="navigation__link">
-              <i className="fa fa-heart-o fa-lg"></i>
-            </Link>
-          </li>
-          <li className="navigation__list-item">
-            <a href="profile.html" className="navigation__link">
-              <i className="fa fa-user-o fa-lg"></i>
-            </a>
-          </li>
+          {user !== null ? authLinks : guestLinks}
         </ul>
       </div>
     </nav>
