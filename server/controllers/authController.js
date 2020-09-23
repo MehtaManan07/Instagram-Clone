@@ -131,6 +131,6 @@ const sendTokenResponse = (statusCode, user, res) => {
 };
 
 exports.logout = asyncHandler(async (req, res) => {
-  res.clearCookie('instagram1');
+  res.clearCookie('instagram');
   res.status(200).json({ success: true });
 });
