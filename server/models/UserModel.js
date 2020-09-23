@@ -3,6 +3,8 @@ const crypto = require('crypto');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const slugify = require('slugify');
+
 const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = new mongoose.Schema({
@@ -15,7 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please tell us your username'],
     trim: true,
-    unique: true
+    unique: true,
   },
   bio: {
     type: String,
@@ -54,19 +56,28 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   gender: {
-      type: String,
-      enum: ['Male', 'Female', 'Other']
+    type: String,
+    enum: ['Male', 'Female', 'Other'],
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  followers: [{ type: ObjectId, ref: "User" }],
-  following: [{ type: ObjectId, ref: "User" }],
+  followers: [{ type: ObjectId, ref: 'User' }],
+  following: [{ type: ObjectId, ref: 'User' }],
+  slug: String,
 
   passwordChangedAt: Date,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Document Middleware, runs before .save() and .create()
+userSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  console.log('slugify ran'.blue);
+  next();
 });
 
 userSchema.pre('save', async function (next) {
