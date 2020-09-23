@@ -17,7 +17,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   // Make sure token is send;
   if (!token) {
-    console.log(req.cookies,'\n')
     return next(
       new ErrorResponse('Not authorized to access the resource', 401)
     );
@@ -38,7 +37,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    console.log(`reached errorr`);
     console.log(error.message);
     return next(
       new ErrorResponse('Not authorized to access the resource', 401)

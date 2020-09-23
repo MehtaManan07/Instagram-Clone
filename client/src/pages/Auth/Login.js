@@ -31,7 +31,7 @@ const Login = () => {
   }, [error]);
 
   if(user !== null){
-    return <Redirect to='/profile' />
+    return <Redirect to={`/profile/${user._id}`} />
   }
 
 

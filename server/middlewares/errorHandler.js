@@ -16,7 +16,9 @@ const errorHandler = (err, req, res, next) => {
 
   //Mongoose duplicate key
   if (err.code === 11000) {
-    const message = "Duplicate field entered";
+    
+   const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+    const message = `${value} is already taken`
     error = new ErrorResponse(message, 400);
   }
 
