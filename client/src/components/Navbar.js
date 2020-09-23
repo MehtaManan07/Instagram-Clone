@@ -39,12 +39,12 @@ const Navbar = (props) => {
   const guestLinks = (
     <>
       <li className="navigation__list-item">
-        <Link to="/login" className="navigation__link">
+        <Link style={{ textDecoration: 'none' }} to="/login" className="navigation__link">
           Login
         </Link>
       </li>
       <li className="navigation__list-item">
-        <Link to="/signup" className="navigation__link">
+        <Link style={{ textDecoration: 'none' }} to="/signup" className="navigation__link">
           Signup
         </Link>
       </li>
