@@ -26,9 +26,7 @@ const Login = () => {
     setValues({ ...values, [name]: e.target.value });
   };
   useEffect(() => {
-    if(error === null){
       toast.error(error,{position: 'bottom-center'})
-    }
   }, [error]);
 
   if (user !== null) {

@@ -12,7 +12,7 @@ const Login = () => {
     username: '',
     password: '',
   });
-  
+
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { user, error } = auth;
@@ -25,24 +25,25 @@ const Login = () => {
     setValues({ ...values, [name]: e.target.value });
   };
   useEffect(() => {
-    if(error === null){
-      toast.error(error,{position: 'bottom-center'})
-    }
+    toast.error(error, { position: 'bottom-center' });
   }, [error]);
 
-  if(user !== null){
-    return <Redirect to={`/profile/${user._id}`} />
+  if (user !== null) {
+    return <Redirect to={`/profile/${user._id}`} />;
   }
-
 
   return (
     <div className="login">
       <div className="login__column">
-        <img src="/images/phoneImage.png" className="login__phone" alt="phone" />
+        <img
+          src="/images/phoneImage.png"
+          className="login__phone"
+          alt="phone"
+        />
       </div>
       <div className="login__column">
         <div className="login__box">
-          <img src="/images/loginLogo.png" className="login__logo" alt='logo' />
+          <img src="/images/loginLogo.png" className="login__logo" alt="logo" />
           <form onSubmit={onSubmitHandler} className="login__form">
             <input
               type="text"
@@ -95,7 +96,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />  
+      <ToastContainer />
     </div>
   );
 };
