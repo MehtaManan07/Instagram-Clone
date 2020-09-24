@@ -4,6 +4,9 @@ const asyncHandler = require('../middlewares/async');
 const Email = require('../utils/email');
 const crypto = require('crypto');
 
+// @route    POST api/v1/auth/signup
+// @desc     signup route
+// @access   Public
 exports.signup = asyncHandler(async (req, res, next) => {
 
   const newUser = await User.create(req.body);
@@ -13,6 +16,9 @@ exports.signup = asyncHandler(async (req, res, next) => {
   sendTokenResponse(201, newUser, res);
 });
 
+// @route    POST api/v1/auth/login
+// @desc     login route
+// @access   Public
 exports.login = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -35,6 +41,9 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(200, user, res);
 });
 
+// @route    POST api/v1/auth/forgotPassword
+// @desc     forgot password
+// @access   Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
@@ -69,6 +78,10 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     );
   }
 });
+
+// @route    POST api/v1/auth/resettPassword/:token
+// @desc     reset password
+// @access   Public
 exports.resetPassword = asyncHandler(async (req, res, next) => {
   const hashedToken = crypto
     .createHash('sha256')
@@ -109,6 +122,9 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   sendTokenResponse(200, user, res);
 });
 
+// @route    ----
+// @desc     middleware for sending cookie to client
+// @access   ----
 const sendTokenResponse = (statusCode, user, res) => {
   const token = user.getSignedJwtToken();
   const cookieOptions = {
@@ -130,6 +146,9 @@ const sendTokenResponse = (statusCode, user, res) => {
   });
 };
 
+// @route    POST api/v1/auth/forgotPassword
+// @desc     forgot password
+// @access   Public || Private, doesn't matter
 exports.logout = asyncHandler(async (req, res) => {
   res.clearCookie('instagram');
   res.status(200).json({ success: true });
