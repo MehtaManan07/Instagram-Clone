@@ -37,8 +37,14 @@ postSchema.virtual('comments', {
   localField: '_id',
 });
 
+userSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true, replacement: '' });
+  console.log('slugify ran'.yellow);
+  next();
+});
+
 postSchema.pre(/^find/, function (next) {
-  this.populate('user', ' name profileImage username ').populate('comments')
+  this.populate('user', ' name profileImage username ').populate('comments');
   next();
 });
 
