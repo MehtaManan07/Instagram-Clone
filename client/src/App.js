@@ -8,6 +8,7 @@ import Landing from './pages/Landing';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
 import Profile from './pages/Profile/Profile';  
+import NewPost from './pages/Post/NewPost';
 
 function App() {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <PrivateRoute path="/profile/:id" exact component={Profile} />
+        <PrivateRoute path='/newPost' exact component={NewPost} />
       </Switch>
     </>
   );
