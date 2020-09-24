@@ -27,11 +27,10 @@ const Login = () => {
   useEffect(() => {
     toast.error(error, { position: 'bottom-center' });
   }, [error]);
-
-  if (user !== null) {
-    return <Redirect to={`/profile/${user._id}`} />;
+ 
+  if(localStorage.getItem('Instagram1')){
+    return <Redirect to={`/profile/${user._id}`} />
   }
-
   return (
     <div className="login">
       <div className="login__column">

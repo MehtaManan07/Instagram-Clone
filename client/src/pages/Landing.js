@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Landing = () => {
+  
+  if(localStorage.getItem('Instagram1')){
+    return <Redirect to='/home' />
+  }
   return (
     <div className="landing">
       <div className="dark-overlay">

@@ -68,7 +68,7 @@ const Navbar = (props) => {
     <nav className="navigation fixed">
       <div className="navigation__column">
         <Link to="/">
-          <img src="images/logo.png" alt="navlogo" />
+          <img src="/images/logo.png" alt="navlogo" />
         </Link>
       </div>
       {user !== null && (
