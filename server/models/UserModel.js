@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
+      default: ''
     },
     email: {
       type: String,
@@ -84,7 +85,7 @@ userSchema.virtual('posts', {
 
 // Document Middleware, runs before .save() and .create()
 userSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
+  this.slug = slugify(this.name, { lower: true, replacement: '' });
   console.log('slugify ran'.blue);
   next();
 });

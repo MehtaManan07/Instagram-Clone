@@ -112,12 +112,12 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
 // @desc     Search for users
 // @access   Private
 exports.search = asyncHandler(async (req, res, next) => {
-  let userPattern = new RegExp(`^${req.body.query}`) 
-  const users = await User.find({ $regex: userPattern, $options: 'i' })
+  let userPattern = new RegExp(`^${req.params.query}`) 
+  const users = await User.find({ slug: { $regex: userPattern, $options: 'i' }})
   res.json({ success: true, data: users })
 });
 
-// @route    POST api/v1/users/deactivate/
+// @route    DELETE api/v1/users/
 // @desc     Deactivate logged in user
 // @access   Private
 exports.deactivate = asyncHandler(async (req, res, next) => {
