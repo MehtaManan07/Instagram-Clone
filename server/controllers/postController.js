@@ -1,8 +1,10 @@
 const Post = require('../models/PostModel');
 const asyncHandler = require('../middlewares/async');
 const ErrorResponse = require('../utils/ErrorResponse');
-const User = require('../models/UserModel');
 
+// @route    POST api/v1/posts/
+// @desc     Create a post
+// @access   Private
 exports.createPost = asyncHandler(async (req, res, next) => {
   req.body.user = req.user.id;
   const post = await Post.create(req.body);
@@ -12,6 +14,9 @@ exports.createPost = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @route    GET api/v1/posts/post/:id
+// @desc     Get a post by id
+// @access   Private || Public, not yet decided
 exports.getPost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
@@ -20,18 +25,27 @@ exports.getPost = asyncHandler(async (req, res, next) => {
   res.json({ success: true, data: post });
 });
 
+// @route    GET api/v1/posts/
+// @desc     Get all posts
+// @access   Private || Public, not yet decided
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
   const posts = await Post.find();
 
   res.json({ success: true, count: posts.length, data: posts });
 });
 
+// @route    GET api/v1/posts/followed
+// @desc     Get the posts of those people who the user follow
+// @access   Private
 exports.getFollowingPosts = asyncHandler(async (req, res, next) => {
   const posts = await Post.find({ user: { $in: req.user.following } });
 
   res.json({ success: true, count: posts.length, data: posts });
 });
 
+// @route    PUT api/v1/posts/like/:id
+// @desc     like a post
+// @access   Private
 exports.likePost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
@@ -39,7 +53,7 @@ exports.likePost = asyncHandler(async (req, res, next) => {
   }
   // Check if the post has already been liked
   if (post.likes.includes(req.user._id)) {
-    return next(new ErrorResponse('Post already liked',400))
+    return next(new ErrorResponse('Post already liked', 400));
   }
 
   const likedPost = await Post.findByIdAndUpdate(
@@ -51,6 +65,9 @@ exports.likePost = asyncHandler(async (req, res, next) => {
   res.json({ success: true, data: likedPost });
 });
 
+// @route    PUT api/v1/posts/unLike/:id
+// @desc     unLike a post
+// @access   Private
 exports.unLikePost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
@@ -58,10 +75,8 @@ exports.unLikePost = asyncHandler(async (req, res, next) => {
   }
 
   // Check if the post has already been liked
-  if (
-    !post.likes.includes(req.user._id)
-  ) {
-    return next(new ErrorResponse('Post already unLiked',400))
+  if (!post.likes.includes(req.user._id)) {
+    return next(new ErrorResponse('Post already unLiked', 400));
   }
 
   const unLikedPost = await Post.findByIdAndUpdate(
@@ -73,43 +88,20 @@ exports.unLikePost = asyncHandler(async (req, res, next) => {
   res.json({ success: true, data: unLikedPost });
 });
 
-exports.newComment = asyncHandler(async (req, res, next) => {
-  const comment = {
-    text: req.body.text,
-    user: req.body.user,
-    name: req.body.name,
-  };
-  console.log(req.body)
-  if (comment.text === '' ) {
-    return next(new ErrorResponse(`Comment cannot be empty`));
+// @route    DELETE api/v1/posts/:id
+// @desc     delete a post
+// @access   Private
+exports.deletePost = asyncHandler(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return next(new ErrorResponse('No post found with that id', 404));
   }
-  const post = await Post.findByIdAndUpdate(req.params.id, {
-    $push: { comments: comment },
-  });
-  res.json({ success: true, data: post });
-});
 
-exports.deleteComment = asyncHandler(async (req, res) => {
-//   const post = await Post.findById(req.params.postId);
+  //this check is going to explicitely handled on client side
+  if (post.user.id.toString() !== req.user._id.toString()) {
+    return next(new ErrorResponse("You cannot touch someone else's post"));
+  }
 
-//   // Pull out comment
-//   const commentToDelete = post.comments.find(
-//     (comment) => comment.id === req.params.commentId
-//   );
-
-//   // Make sure comment exists
-//   if (!commentToDelete) {
-//     return next(new ErrorResponse('Comment does not exist', 404));
-//   }
-
-//   // Get remove index
-//   const removeIndex = post.comments
-//     .map((comment) => comment.id)
-//     .indexOf(req.params.commentId);
-
-//   post.comments.splice(removeIndex, 1);
-
-//   await post.save();
-
-//   res.json({ success: true, data: post });
+  await post.remove();
+  res.status(204).json({ succes: true });
 });

@@ -33,6 +33,7 @@ connectDB();
 app.use('/api/v1/auth', require('./server/routes/authRoutes'))
 app.use('/api/v1/users', require('./server/routes/userRoutes'))
 app.use('/api/v1/posts', require('./server/routes/postRoutes'))
+app.use('/api/v1/comments', require('./server/routes/commentRoutes'))
 
 
 if(process.env.NODE_ENV === 'development'){
