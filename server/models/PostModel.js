@@ -37,7 +37,7 @@ postSchema.virtual('comments', {
   localField: '_id',
 });
 
-userSchema.pre('save', function (next) {
+postSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true, replacement: '' });
   console.log('slugify ran'.yellow);
   next();
