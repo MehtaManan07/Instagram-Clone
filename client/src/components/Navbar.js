@@ -12,6 +12,11 @@ const Navbar = (props) => {
   const authLinks = (
     <>
       <li className="navigation__list-item">
+        <Link to="/newPost" className="navigation__link">
+          <i className="fa fa-plus fa-lg"></i>
+        </Link>
+      </li>
+      <li className="navigation__list-item">
         <Link to="/explore" className="navigation__link">
           <i className="fa fa-compass fa-lg"></i>
         </Link>
