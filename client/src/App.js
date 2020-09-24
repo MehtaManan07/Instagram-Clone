@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
-import Profile from './pages/Profile';  
+import Profile from './pages/Profile/Profile';  
 
 function App() {
   const dispatch = useDispatch()
