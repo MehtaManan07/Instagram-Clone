@@ -146,7 +146,7 @@ const sendTokenResponse = (statusCode, user, res) => {
   });
 };
 
-// @route    POST api/v1/auth/forgotPassword
+// @route    POST api/v1/auth/logout
 // @desc     forgot password
 // @access   Public || Private, doesn't matter
 exports.logout = asyncHandler(async (req, res) => {
