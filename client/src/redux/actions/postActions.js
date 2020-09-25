@@ -30,7 +30,7 @@ export const getAllPosts = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/v1/posts/');
     dispatch({
-      type: GET_ALL,
+      type: GET_ALL_SUCCESS,
       payload: data.data,
     });
 

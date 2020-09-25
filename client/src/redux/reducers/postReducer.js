@@ -14,7 +14,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: true };
     
     case GET_ALL_SUCCESS:
-      return { ...state, error: null, posts: payload }
+      return { ...state, error: null, posts: payload, loading: false }
 
     case NEWPOST_SUCCESS:
       return {
