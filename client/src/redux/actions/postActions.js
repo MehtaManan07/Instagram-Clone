@@ -33,7 +33,6 @@ export const getAllPosts = () => async (dispatch) => {
 };
 
 export const likePost = (postId) => async (dispatch) => {
-  dispatch({ type: types.LIKEPOST_REQUEST });
   try {
     const { data } = await axios.put(`/api/v1/posts/like/${postId}`);
     dispatch({
@@ -48,8 +47,6 @@ export const likePost = (postId) => async (dispatch) => {
 };
 
 export const unlikePost = (postId) => async (dispatch) => {
-  console.log('poicha bhai')
-  dispatch({ type: types.UNLIKEPOST_REQUEST });
   try {
     const { data } = await axios.put(`/api/v1/posts/unLike/${postId}`);
     dispatch({
