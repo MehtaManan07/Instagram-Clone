@@ -20,9 +20,11 @@ export default (state = initialState, { type, payload }) => {
         error: null,
       };
     case NEWPOST_FAILURE:
-        return {
-            ...state, error: payload, loading: false
-        }
+      return {
+        ...state,
+        error: payload,
+        loading: false,
+      };
     default:
       return state;
   }

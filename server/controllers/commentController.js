@@ -6,9 +6,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 // sort of middleware
 exports.checkPostId = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.postId);
-  // console.log(post)
   if (!post) {
-    console.log(req.params)
     return next(
       new ErrorResponse(`No post found with that id ${req.params.postId}`, 404)
     );
@@ -137,7 +135,6 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
 exports.checkCommentOwner = async (req, res, next) => {
   const comment = await Comment.findById(req.params.id);
   const post = await Post.findById(req.body.postId);
-  console.log(req.body)
   if (req.user.id.toString() !== post.user.id.toString()) {
     if (comment.user.id.toString() !== req.user.id.toString())
       return next(

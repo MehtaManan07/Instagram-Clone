@@ -6,9 +6,7 @@ const PostForm = ({ values, setValues, submitHandler }) => {
   };
 
   const imageChangeHandler = (e) => {
-    console.log(e.target.files[0])
-    setValues({ ...values, photo: e.target.files[0] });
-    console.log(values);
+    setValues({ ...values, image: e.target.files[0] });
   };
 
   return (
@@ -20,6 +18,7 @@ const PostForm = ({ values, setValues, submitHandler }) => {
           value={values.name}
           onChange={onChangeHandler('name')}
           className="form__input"
+          required
         />
       </div>
       <div className="form__row">
@@ -29,6 +28,7 @@ const PostForm = ({ values, setValues, submitHandler }) => {
           value={values.description}
           onChange={onChangeHandler('description')}
           className="form__input"
+          required
         />
       </div>
       <div className="form__row">
@@ -37,6 +37,7 @@ const PostForm = ({ values, setValues, submitHandler }) => {
           type="file"
           onChange={imageChangeHandler}
           className="form__input"
+          required
         />
       </div>
       <div className="text-center">

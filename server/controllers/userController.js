@@ -122,7 +122,6 @@ exports.search = asyncHandler(async (req, res, next) => {
 // @access   Private
 exports.deactivate = asyncHandler(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user._id, { active: false });
-  console.log(`assaassaassaassa`.red);
   res.status(204).json({
     success: true,
     data: null,

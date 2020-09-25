@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
-
+const slugify = require('slugify');
 const postSchema = new mongoose.Schema(
   {
     name: {
@@ -39,7 +39,6 @@ postSchema.virtual('comments', {
 
 postSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true, replacement: '' });
-  console.log('slugify ran'.yellow);
   next();
 });
 
