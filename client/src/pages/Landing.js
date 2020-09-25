@@ -2,9 +2,8 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Landing = () => {
-  
-  if(localStorage.getItem('Instagram1')){
-    return <Redirect to='/home' />
+  if (localStorage.getItem('Instagram1')) {
+    return <Redirect to="/home" />;
   }
   return (
     <div className="landing">
@@ -23,8 +22,20 @@ const Landing = () => {
             A Social Media So Desirable, feel the social experience{' '}
           </p>
           <div className="buttons">
-              <Link className='btn-dark mr-2 btn-lg' style={{ textDecoration: 'none' }} to="/signup">Sign Up</Link>
-              <Link className='ml-1 btn-dark btn-lg' style={{ textDecoration: 'none' }} to="/login">Login</Link>
+            <Link
+              className="btn-dark mr-2 btn-lg"
+              style={{ textDecoration: 'none' }}
+              to="/signup"
+            >
+              Sign Up
+            </Link>
+            <Link
+              className="ml-1 btn-dark btn-lg"
+              style={{ textDecoration: 'none' }}
+              to="/login"
+            >
+              Login
+            </Link>
           </div>
         </div>
       </div>
