@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer, toast } from 'react-toastify';
 import PostForm from '../../components/Post/PostForm';
 import { newPost } from '../../redux/actions/postActions';
 import axios from 'axios';
@@ -24,18 +26,26 @@ const NewPost = () => {
     formdata.append('file', values.image);
     formdata.append('upload_preset', 'instagram_social');
     formdata.append('cloud_name', 'manan07');
-    const { data } = await axios.post(
-      'https://api.cloudinary.com/v1_1/manan07/image/upload',
-      formdata
-    );
-    setUrl(data.url);
+    try {
+      if (post.error === null) {
+        const { data } = await axios.post(
+          'https://api.cloudinary.com/v1_1/manan07/image/upload',
+          formdata
+        );
+        setUrl(data.url);
+      }
+    } catch (error) {
+      toast.error(error.response.data.error.message);
+    }
   };
   const submitHandler = (e) => {
+    console.log('bhal')
     e.preventDefault();
     loadImage();
   };
   useEffect(() => {
     if (url !== '') {
+      console.log('yay')
       dispatch(newPost({ name, description, image: url }));
     }
     // eslint-disable-next-line
@@ -47,6 +57,12 @@ const NewPost = () => {
     } else didMount.current = true;
     // eslint-disable-next-line
   }, [post.posts]);
+
+  useEffect(() => {
+    if (didMount.current) {
+      toast.error(post.error);
+    } else didMount.current = true;
+  }, [post.error]);
 
   return (
     <main id="edit-profile">
@@ -67,6 +83,7 @@ const NewPost = () => {
           setValues={setValues}
         />
       </div>
+      <ToastContainer autoClose={3000} position="bottom-center" />
     </main>
   );
 };
