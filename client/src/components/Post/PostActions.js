@@ -30,7 +30,7 @@ const PostActions = ({ post }) => {
         <span className="photo__likes">{post.likes.length} likes</span>
         <ul className="photo__comments">
           {post.comments.map((comment) => (
-            <li className="photo__comment">
+            <li key={comment._id} className="photo__comment">
               <span className="photo__comment-author">
                 {comment.user.username}
               </span>{' '}
