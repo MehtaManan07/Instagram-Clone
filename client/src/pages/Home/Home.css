@@ -102,5 +102,6 @@
   }
   .ml {
       float: right;
+      margin-bottom: auto;
       cursor: pointer;
   }

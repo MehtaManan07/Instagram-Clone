@@ -29,7 +29,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 // @desc     Get all posts
 // @access   Private || Public, not yet decided
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
-  const posts = await Post.find();
+  const posts = await Post.find().sort('-createdAt');
 
   res.json({ success: true, count: posts.length, data: posts });
 });

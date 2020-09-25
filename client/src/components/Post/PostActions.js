@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { likePost, unlikePost } from '../../redux/actions/postActions'
+import { likePost, unlikePost } from '../../redux/actions/postActions';
 
 const PostActions = ({ post }) => {
-    const auth = useSelector(state => state.auth)
-    const dispatch = useDispatch()
-    const { user } = auth
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { user } = auth;
   return (
     <div>
       <div className="photo__info">
@@ -15,9 +15,9 @@ const PostActions = ({ post }) => {
               <i
                 className="fa fa-heart fa-lg"
                 onClick={(e) => {
-                  e.preventDefault()
-                  dispatch(unlikePost(post._id))}
-                  }
+                  e.preventDefault();
+                  dispatch(unlikePost(post._id));
+                }}
                 style={{ cursor: 'pointer', color: 'rgba(255,0,0,0.5)' }}
               ></i>
             ) : (
@@ -34,15 +34,16 @@ const PostActions = ({ post }) => {
         </div>
         <span className="photo__likes">{post.likes.length} likes</span>
         <ul className="photo__comments">
-          {post.comments.map((comment) => (
-            <li key={comment._id} className="photo__comment">
-              <span className="photo__comment-author">
-                {comment.user.username}
-              </span>{' '}
-              {comment.text}
-              <i className="fa ml fa-ellipsis-h"></i>
-            </li>
-          ))}
+          {post.comments !== [] &&
+            post.comments.map((comment) => (
+              <li key={comment._id} className="photo__comment">
+                <span className="photo__comment-author">
+                  {comment.user.username}
+                </span>{' '}
+                {comment.text}
+                <i className="fa ml fa-ellipsis-h"></i>
+              </li>
+            ))}
         </ul>
         <span className="photo__time-ago">2 hours ago</span>
         <div className="photo__add-comment-container">

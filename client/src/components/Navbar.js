@@ -22,6 +22,14 @@ const Navbar = (props) => {
         </Link>
       </li>
       <li className="navigation__list-item">
+        <Link
+          to={`/profile/${user !== null && user._id}`}
+          className="navigation__link"
+        >
+          <i className="fa fa-user-o fa-lg"></i>
+        </Link>
+      </li>
+      <li className="navigation__list-item">
         <span
           style={{ cursor: 'pointer' }}
           className="navigation__link"
@@ -29,14 +37,6 @@ const Navbar = (props) => {
         >
           <i className="fa fa-sign-out fa-lg">Logout</i>
         </span>
-      </li>
-      <li className="navigation__list-item">
-        <Link
-          to={`/profile/${user !== null && user._id}`}
-          className="navigation__link"
-        >
-          <i className="fa fa-user-o fa-lg"></i>
-        </Link>
       </li>
     </>
   );
@@ -80,7 +80,7 @@ const Navbar = (props) => {
       <div className="navigation__column">
         <ul className="navigations__links">
           {/* this check below needs to be improved later and a spinner should be used */}
-          {localStorage.getItem('Instagram1') ? authLinks : guestLinks}
+          {auth.isAuth ? authLinks : guestLinks}
         </ul>
       </div>
     </nav>

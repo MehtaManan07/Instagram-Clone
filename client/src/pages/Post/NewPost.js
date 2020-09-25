@@ -7,6 +7,7 @@ import PostForm from '../../components/Post/PostForm';
 import { newPost } from '../../redux/actions/postActions';
 import axios from 'axios';
 import './Edit.css';
+import Loader from '../../components/Loader';
 
 const NewPost = () => {
   const history = useHistory();
@@ -39,13 +40,13 @@ const NewPost = () => {
     }
   };
   const submitHandler = (e) => {
-    console.log('bhal')
+    console.log('bhal');
     e.preventDefault();
     loadImage();
   };
   useEffect(() => {
     if (url !== '') {
-      console.log('yay')
+      console.log('yay');
       dispatch(newPost({ name, description, image: url }));
     }
     // eslint-disable-next-line
@@ -66,23 +67,27 @@ const NewPost = () => {
 
   return (
     <main id="edit-profile">
-      <div className="edit-profile__container">
-        <header className="edit-profile__header">
-          <div className="edit-profile__avatar-container">
-            <img
-              src="https://cdn.pixabay.com/photo/2017/11/10/05/04/instagram-2935404__340.png"
-              alt="logo"
-              className="edit-profile__avatar"
-            />
-          </div>
-          <h3 className="edit-profile__username">New Post</h3>
-        </header>
-        <PostForm
-          submitHandler={submitHandler}
-          values={values}
-          setValues={setValues}
-        />
-      </div>
+      {post.loading ? (
+        <Loader />
+      ) : (
+        <div className="edit-profile__container">
+          <header className="edit-profile__header">
+            <div className="edit-profile__avatar-container">
+              <img
+                src="https://cdn.pixabay.com/photo/2017/11/10/05/04/instagram-2935404__340.png"
+                alt="logo"
+                className="edit-profile__avatar"
+              />
+            </div>
+            <h3 className="edit-profile__username">New Post</h3>
+          </header>
+          <PostForm
+            submitHandler={submitHandler}
+            values={values}
+            setValues={setValues}
+          />
+        </div>
+      )}
       <ToastContainer autoClose={3000} position="bottom-center" />
     </main>
   );

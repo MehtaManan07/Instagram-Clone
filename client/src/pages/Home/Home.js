@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllPosts } from '../../redux/actions/postActions';
 import SinglePost from '../../components/Post/SinglePost';
 import './Home.css';
+import Loader from '../../components/Loader';
 
 const Home = () => {
   const post = useSelector((state) => state.post);
@@ -15,7 +16,7 @@ const Home = () => {
   return (
     <>
       {loading ? (
-        <></>
+        <Loader />
       ) : (
         <main id="feed">
           {posts !== [] &&
