@@ -1,4 +1,4 @@
-import { NEWPOST_FAILURE, NEWPOST_REQUEST, NEWPOST_SUCCESS } from '../types';
+import { GET_ALL_FAILURE, GET_ALL_REQUEST, GET_ALL_SUCCESS, NEWPOST_FAILURE, NEWPOST_REQUEST, NEWPOST_SUCCESS } from '../types';
 
 const initialState = {
   posts: [],
@@ -10,7 +10,11 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case NEWPOST_REQUEST:
+    case GET_ALL_REQUEST:
       return { ...state, loading: true };
+    
+    case GET_ALL_SUCCESS:
+      return { ...state, error: null, posts: payload }
 
     case NEWPOST_SUCCESS:
       return {
@@ -20,6 +24,7 @@ export default (state = initialState, { type, payload }) => {
         error: null,
       };
     case NEWPOST_FAILURE:
+    case GET_ALL_FAILURE:
       return {
         ...state,
         error: payload,
