@@ -22,7 +22,7 @@ const postSchema = new mongoose.Schema(
       type: ObjectId,
       ref: 'User',
     },
-    date: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },
