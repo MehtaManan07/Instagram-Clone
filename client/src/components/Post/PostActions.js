@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { likePost, unlikePost } from '../../redux/actions/postActions'
 
 const PostActions = ({ post }) => {
     const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
     const { user } = auth
   return (
     <div>
@@ -12,13 +14,16 @@ const PostActions = ({ post }) => {
             {user !== null && post.likes.includes(user._id) ? (
               <i
                 className="fa fa-heart fa-lg"
-                // onClick={() => unlikeOnePost(post._id)}
+                onClick={(e) => {
+                  e.preventDefault()
+                  dispatch(unlikePost(post._id))}
+                  }
                 style={{ cursor: 'pointer', color: 'rgba(255,0,0,0.5)' }}
               ></i>
             ) : (
               <i
                 className="fa fa-heart-o fa-lg"
-                // onClick={() => likeOnePost(post._id)}
+                onClick={() => dispatch(likePost(post._id))}
                 style={{ cursor: 'pointer', color: 'rgba(255,0,0,0.5)' }}
               ></i>
             )}

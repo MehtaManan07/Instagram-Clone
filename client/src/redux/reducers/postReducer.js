@@ -1,4 +1,4 @@
-import { GET_ALL_FAILURE, GET_ALL_REQUEST, GET_ALL_SUCCESS, NEWPOST_FAILURE, NEWPOST_REQUEST, NEWPOST_SUCCESS } from '../types';
+import * as types from '../types';
 
 const initialState = {
   posts: [],
@@ -9,22 +9,35 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case NEWPOST_REQUEST:
-    case GET_ALL_REQUEST:
+    case types.NEWPOST_REQUEST:
+    case types.GET_ALL_REQUEST:
       return { ...state, loading: true };
-    
-    case GET_ALL_SUCCESS:
-      return { ...state, error: null, posts: payload, loading: false }
 
-    case NEWPOST_SUCCESS:
+    case types.GET_ALL_SUCCESS:
+      return { ...state, error: null, posts: payload, loading: false };
+
+    case types.NEWPOST_SUCCESS:
       return {
         ...state,
         posts: [payload, ...state.posts],
         loading: false,
         error: null,
       };
-    case NEWPOST_FAILURE:
-    case GET_ALL_FAILURE:
+
+    case types.LIKEPOST_SUCCESS:
+    case types.UNLIKEPOST_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === payload.postId ? { ...post, likes: payload.likes } : post
+        ),
+        loading: false,
+      };
+
+    case types.NEWPOST_FAILURE:
+    case types.GET_ALL_FAILURE:
+    case types.LIKEPOST_FAILURE:
+    case types.UNLIKEPOST_FAILURE:
       return {
         ...state,
         error: payload,
