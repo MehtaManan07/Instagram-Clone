@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostActions from './PostActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PostOptions from './PostOptions';
 
 const SinglePost = ({ post }) => {
+  const [show, setShow] = useState(false);
   return (
     <div className="photo">
       <div className="d-flex justify-content-between">
@@ -23,7 +25,11 @@ const SinglePost = ({ post }) => {
             </Link>
           </div>
         </header>
-        <i className="fa ml fa-ellipsis-h ml-auto mt-auto mr-2" />
+        <i
+          className="fa ml fa-ellipsis-h ml-auto mt-auto mr-2"
+          onClick={() => setShow(true)}
+        />
+        <PostOptions show={show} onHide={() => setShow(false)} />
       </div>
       <img
         src={post.image}
