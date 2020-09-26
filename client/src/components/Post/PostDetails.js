@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../../redux/actions/postActions';
 import Loader from '../Loader';
 import PostHeader from './PostHeader';
+import PostActions from './PostActions';
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -28,10 +29,8 @@ const PostDetails = () => {
           </div>
           <div className="post_content">
             <PostHeader post={post.post} />
-          </div>
-          <div className="post_footer">
-            <textarea name="comment" placeholder="Add a comment..."></textarea>
-            <i className="fa fa-ellipsis-h"></i>
+
+            <PostActions post={post.post} />
           </div>
         </div>
       )}
