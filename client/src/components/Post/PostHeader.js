@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 const PostHeader = ({ post }) => {
   return (
-      <div className="post_header">
-    <Link style={{ textDecoration: 'none' }} to={`/profile/${post.user._id}`}>
-
+    <div className="post_header">
+      <Link style={{ textDecoration: 'none' }} to={`/profile/${post.user._id}`}>
         <img
           src={post.user.profileImage}
           style={{
@@ -16,14 +15,17 @@ const PostHeader = ({ post }) => {
           }}
           alt="profile"
         />
-    </Link>
-    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/profile/${post.user._id}`}>
+      </Link>
+      <Link
+        style={{ textDecoration: 'none', color: 'black' }}
+        to={`/profile/${post.user._id}`}
+      >
         <div className="post_headerInfo">
           <h6>{post.user.username}</h6>
-          <p>last seen</p>
+          <p>Location</p>
         </div>
-            </Link>
-      </div>
+      </Link>
+    </div>
   );
 };
 
