@@ -34,7 +34,7 @@ const PostActions = ({ post }) => {
         </div>
         <span className="photo__likes">{post.likes.length} likes</span>
         <ul className="photo__comments">
-          {post.comments !== [] &&
+          {post.comments &&
             post.comments.map((comment) => (
               <li key={comment._id} className="photo__comment">
                 <span className="photo__comment-author">

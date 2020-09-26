@@ -10,6 +10,7 @@ import Signup from './pages/Auth/Signup';
 import Profile from './pages/Profile/Profile';
 import NewPost from './pages/Post/NewPost';
 import Home from './pages/Home/Home';
+import PostDetails from './components/Post/PostDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
         <PrivateRoute path="/profile/:id" exact component={Profile} />
         <PrivateRoute path="/newPost" exact component={NewPost} />
         <PrivateRoute path="/home" exact component={Home} />
+        <PrivateRoute path="/post/:postId" exact component={PostDetails} />
       </Switch>
     </>
   );

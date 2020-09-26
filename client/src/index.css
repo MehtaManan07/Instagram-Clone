@@ -35,3 +35,68 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+
+.fleft {
+  float: left;
+  width: 65%;
+}
+.fright {
+  float: right;
+  max-width: 35%;
+}
+
+.one_post {
+  display: flex;
+  height: 90vh;
+  margin: 25px 40px;
+  
+  border: 1px solid lightgray;
+}
+
+.post_image {
+  flex-direction: column;
+  flex: 0.65;
+  margin-bottom: 50px,
+}
+
+.post_content {
+  flex-direction: column;
+  flex: 0.35;
+  margin-left: 5px;
+}
+
+.post_header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.post_headerInfo {
+flex: 1;
+padding-left: 17px;
+}
+
+.post_headerInfo > h6 {
+margin-bottom: 1px;
+margin-top: 7px;
+font-weight: 500;
+}
+.post_headerInfo > p {
+color: gray
+}
+
+.post_icon {
+  margin: auto 
+}
+
+.ml {
+  float: right;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+
+.post_footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}

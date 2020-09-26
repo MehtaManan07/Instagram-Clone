@@ -11,10 +11,14 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case types.NEWPOST_REQUEST:
     case types.GET_ALL_REQUEST:
+    case types.GET_POST_REQUEST:
       return { ...state, loading: true };
 
     case types.GET_ALL_SUCCESS:
       return { ...state, error: null, posts: payload, loading: false };
+
+    case types.GET_POST_SUCCESS:
+      return { ...state, post: payload, loading: false, error: null };
 
     case types.NEWPOST_SUCCESS:
       return {
@@ -36,6 +40,7 @@ export default (state = initialState, { type, payload }) => {
 
     case types.NEWPOST_FAILURE:
     case types.GET_ALL_FAILURE:
+    case types.GET_POST_FAILURE:
     case types.LIKEPOST_FAILURE:
     case types.UNLIKEPOST_FAILURE:
       return {

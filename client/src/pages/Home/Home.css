@@ -100,8 +100,4 @@
   .photo__comments .photo__comment-author {
     font-weight: 600;
   }
-  .ml {
-      float: right;
-      margin-bottom: auto;
-      cursor: pointer;
-  }
+  
