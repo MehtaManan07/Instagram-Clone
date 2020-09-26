@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
-      default: ''
+      default: '',
     },
     email: {
       type: String,
@@ -67,6 +67,8 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: Date,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+
+    reported: [{ type: ObjectId, ref: 'User' }],
 
     date: {
       type: Date,

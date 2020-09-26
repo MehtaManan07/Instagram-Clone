@@ -2,6 +2,7 @@ import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dropdown } from 'react-bootstrap';
 import { logoutUser } from '../redux/actions/authActions';
 
 const Navbar = (props) => {
@@ -22,22 +23,25 @@ const Navbar = (props) => {
         </Link>
       </li>
       <li className="navigation__list-item">
-        <Link
-          to={`/profile/${user !== null && user._id}`}
-          className="navigation__link"
-        >
-          <i className="fa fa-user-o fa-lg"></i>
-        </Link>
+        <Dropdown>
+          <Dropdown.Toggle className='navigation__link' variant="none">
+            <i className="fa fa-user-o fa-lg"></i>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item> Profile </Dropdown.Item>
+            <Dropdown.Item> Settings </Dropdown.Item>
+            <Dropdown.Item>
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => dispatch(logoutUser())}
+              >
+                <i className="fa fa-sign-out fa-lg">Logout</i>
+              </span>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </li>
-      <li className="navigation__list-item">
-        <span
-          style={{ cursor: 'pointer' }}
-          className="navigation__link"
-          onClick={() => dispatch(logoutUser())}
-        >
-          <i className="fa fa-sign-out fa-lg">Logout</i>
-        </span>
-      </li>
+      <li className="navigation__list-item"></li>
     </>
   );
 
