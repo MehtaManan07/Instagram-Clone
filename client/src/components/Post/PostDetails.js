@@ -29,8 +29,6 @@ const PostDetails = () => {
           </div>
           <div className="post_content">
             <PostHeader post={post.post} />
-
-            <PostActions post={post.post} />
           </div>
         </div>
       )}
