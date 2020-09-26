@@ -128,3 +128,10 @@ exports.deactivate = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @route    PUT api/v1/users/report
+// @desc     Report a user
+// @access   Private
+exports.reportUser = asyncHandler(async (req, res, next) => {
+
+});
+
