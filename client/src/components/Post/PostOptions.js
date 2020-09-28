@@ -2,6 +2,7 @@ import React from 'react';
 import { ListGroup, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const PostOptions = (props) => {
+  console.log(props)
   return (
     <div>
       <Modal
@@ -16,7 +17,7 @@ const PostOptions = (props) => {
             </ListGroup.Item>
             <ListGroup.Item>Follow unfollow</ListGroup.Item>
             <Link to={`/post/${props.post._id}`}><ListGroup.Item>View post</ListGroup.Item></Link>
-            <ListGroup.Item>Cancel</ListGroup.Item>
+            <ListGroup.Item onClick={() => props.setShow(false)} >Cancel</ListGroup.Item>
           </ListGroup>
         </Modal.Body>
       </Modal>

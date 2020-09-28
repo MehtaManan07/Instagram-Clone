@@ -14,6 +14,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfile(id));
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../../redux/actions/postActions';
 import Loader from '../Loader';
 import PostHeader from './PostHeader';
-import PostActions from './PostActions';
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -13,6 +12,7 @@ const PostDetails = () => {
   const post = useSelector((state) => state.post);
   useEffect(() => {
     dispatch(getPost(postId));
+    // eslint-disable-next-line
   }, []);
   return (
     <Card>

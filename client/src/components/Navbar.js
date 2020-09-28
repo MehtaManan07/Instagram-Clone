@@ -1,12 +1,13 @@
 import React from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { logoutUser } from '../redux/actions/authActions';
 
-const Navbar = (props) => {
+const Navbar = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const auth = useSelector((state) => state.auth);
   const { user } = auth;
 
@@ -24,11 +25,18 @@ const Navbar = (props) => {
       </li>
       <li className="navigation__list-item">
         <Dropdown>
-          <Dropdown.Toggle className='navigation__link' variant="none">
+          <Dropdown.Toggle className="navigation__link" variant="none">
             <i className="fa fa-user-o fa-lg"></i>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item> Profile </Dropdown.Item>
+            <Dropdown.Item>
+              <span
+                onClick={() => history.push(`/profile/${user && user._id}`)}
+                style={{ textDecoration: 'none' }}
+              >
+                <i className="fa fa-user fa-lg">Profile</i>
+              </span>
+            </Dropdown.Item>
             <Dropdown.Item> Settings </Dropdown.Item>
             <Dropdown.Item>
               <span

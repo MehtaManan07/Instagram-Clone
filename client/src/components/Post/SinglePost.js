@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import PostActions from './PostActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostOptions from './PostOptions';
@@ -15,7 +14,7 @@ const SinglePost = ({ post }) => {
           className="fa ml fa-ellipsis-h ml-auto mt-auto mr-2"
           onClick={() => setShow(true)}
         />
-        <PostOptions post={post} show={show} onHide={() => setShow(false)} />
+        <PostOptions post={post} show={show} setShow={setShow} onHide={() => setShow(false)} />
       </div>
       <img
         src={post.image}
