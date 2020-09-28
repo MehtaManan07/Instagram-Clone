@@ -23,7 +23,10 @@ const PostActions = ({ post }) => {
             ) : (
               <i
                 className="fa fa-heart-o fa-lg"
-                onClick={() => dispatch(likePost(post._id))}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(likePost(post._id));
+                }}
                 style={{ cursor: 'pointer', color: 'rgba(255,0,0,0.5)' }}
               ></i>
             )}

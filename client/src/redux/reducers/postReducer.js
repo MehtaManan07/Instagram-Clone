@@ -18,7 +18,12 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, error: null, posts: payload, loading: false };
 
     case types.GET_POST_SUCCESS:
-      return { ...state, post: payload, loading: false, error: null };
+      return {
+        ...state,
+        post: payload,
+        loading: false,
+        error: null,
+      };
 
     case types.NEWPOST_SUCCESS:
       return {
@@ -30,11 +35,13 @@ export default (state = initialState, { type, payload }) => {
 
     case types.LIKEPOST_SUCCESS:
     case types.UNLIKEPOST_SUCCESS:
+      console.log(state)
       return {
         ...state,
         posts: state.posts.map((post) =>
           post._id === payload.postId ? { ...post, likes: payload.likes } : post
         ),
+        post: { ...state.post, likes: payload.likes },
         loading: false,
       };
 

@@ -14,7 +14,12 @@ const SinglePost = ({ post }) => {
           className="fa ml fa-ellipsis-h ml-auto mt-auto mr-2"
           onClick={() => setShow(true)}
         />
-        <PostOptions post={post} show={show} setShow={setShow} onHide={() => setShow(false)} />
+        <PostOptions
+          post={post}
+          show={show}
+          setShow={setShow}
+          onHide={() => setShow(false)}
+        />
       </div>
       <img
         src={post.image}

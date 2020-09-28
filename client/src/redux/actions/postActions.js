@@ -54,7 +54,7 @@ export const unlikePost = (postId) => async (dispatch) => {
       payload: { postId, likes: data.data.likes },
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     const displayErr = error.response.data.error;
     dispatch({ type: types.UNLIKEPOST_FAILURE, payload: displayErr });
   }
