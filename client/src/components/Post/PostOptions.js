@@ -2,7 +2,6 @@ import React from 'react';
 import { ListGroup, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const PostOptions = (props) => {
-  console.log(props)
   return (
     <div>
       <Modal

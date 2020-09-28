@@ -66,7 +66,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
       message: 'Token sent to email!',
     });
   } catch (error) {
-    console.log('reached catch', error);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -108,7 +107,6 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   if (!user) {
     return next(new ErrorResponse(`No user found`, 404));
   }
-  console.log(user);
 
   //Check current password;
   const isMatch = await user.matchPassword(req.body.currentPassword);

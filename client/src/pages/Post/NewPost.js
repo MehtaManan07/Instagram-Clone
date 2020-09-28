@@ -40,13 +40,11 @@ const NewPost = () => {
     }
   };
   const submitHandler = (e) => {
-    console.log('bhal');
     e.preventDefault();
     loadImage();
   };
   useEffect(() => {
     if (url !== '') {
-      console.log('yay');
       dispatch(newPost({ name, description, image: url }));
     }
     // eslint-disable-next-line
