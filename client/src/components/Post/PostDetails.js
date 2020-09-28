@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../../redux/actions/postActions';
@@ -16,7 +15,7 @@ const PostDetails = () => {
     // eslint-disable-next-line
   }, []);
   return (
-    <Card>
+    <>
       {post.loading || post.post === null ? (
         <Loader />
       ) : (
@@ -34,7 +33,7 @@ const PostDetails = () => {
           </div>
         </div>
       )}
-    </Card>
+    </>
   );
 };
 

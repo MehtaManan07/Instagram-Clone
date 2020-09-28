@@ -21,7 +21,7 @@ const Home = () => {
         <main id="feed">
           {posts !== [] &&
             posts.map((post, i) => {
-              return <SinglePost post={post} />;
+              return <SinglePost key={i} post={post} />;
             })}
         </main>
       )}

@@ -26,7 +26,10 @@ const SinglePost = ({ post }) => {
         alt="post"
         style={{ maxHeight: '450px', width: '100%', borderRadius: '3px' }}
       />
-      <PostActions post={post} />
+      <div className="photo__inf0o">
+      <PostActions home post={post} />
+
+      </div>
     </div>
   );
 };
