@@ -100,7 +100,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @desc     Get user's profile
 // @access   Private
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id)
+  const user = await User.findById(req.params.id).populate('posts');
   if(!user){
     return next(new ErrorResponse(`No user found with that id`,404))
   }
