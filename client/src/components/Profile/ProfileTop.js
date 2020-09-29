@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileTop = ({ user, loading }) => {
+const ProfileTop = ({ user }) => {
   return (
     <div>
     {user === null ? <></> : (
@@ -17,7 +17,7 @@ const ProfileTop = ({ user, loading }) => {
           </div>
           <ul className="profile__stats">
             <li className="profile__stat">
-              <span className="stat__number">333</span> posts
+              <span className="stat__number">{user.posts.length}</span> posts
             </li>
             <li className="profile__stat">
               <span className="stat__number">{user.followers.length}</span> followers
