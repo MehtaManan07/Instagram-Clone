@@ -103,7 +103,7 @@
 #profile .profile__photos {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-around; */
   max-width: 936px;
   width: 100%;
 }
@@ -111,6 +111,7 @@
 .profile__photos .profile__photo {
   width: 31%;
   margin-bottom: 35px;
+  margin: 1%;
   position: relative;
 }
 

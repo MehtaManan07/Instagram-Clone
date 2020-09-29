@@ -19,13 +19,13 @@ const Profile = () => {
 
   return (
     <main id="profile">
-      {loading ? (
+      {loading || !user.profile ? (
         <Loader />
       ) : (
         <>
           <ProfileTop user={user.profile} />
           <section className="profile__photos">
-            <ProfilePosts />
+            <ProfilePosts posts={user.profile.posts} />
           </section>
         </>
       )}
