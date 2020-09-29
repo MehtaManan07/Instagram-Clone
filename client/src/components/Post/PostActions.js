@@ -95,8 +95,8 @@ const PostActions = ({ post, home = false }) => {
         <span className="photo__likes">{post.likes.length} likes</span>
         <ul className={`photo__comments ${!home && 'comm'}`}>
           <p>
-            {home ? (
-              <Link to={`/post/${post._id}`}>View All Comments</Link>
+            {home && post.comments && post.comments.length > 2 ? (
+              <Link className='text-dark' to={`/post/${post._id}`}>View All {post.comments.length} Comments</Link>
             ) : (
               ''
             )}
