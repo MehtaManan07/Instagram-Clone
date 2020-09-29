@@ -36,13 +36,15 @@ export default (state = initialState, { type, payload }) => {
     case types.COMMENT_SUCCESS:
       return {
         ...state,
-        post: { ...state.post, comments: payload },
+        posts: state.posts.map((post) =>
+          post._id === payload.postId ? { ...post, comments: payload.comments } : post
+        ),
+        post: { ...state.post, comments: payload.comments },
         loading: false,
       };
 
     case types.LIKEPOST_SUCCESS:
     case types.UNLIKEPOST_SUCCESS:
-      console.log(state);
       return {
         ...state,
         posts: state.posts.map((post) =>

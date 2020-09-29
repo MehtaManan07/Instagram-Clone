@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost, unlikePost } from '../../redux/actions/postActions';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { addComment } from '../../redux/actions/commentActions';
 
 const PostActions = ({ post, home = false }) => {
@@ -25,11 +25,10 @@ const PostActions = ({ post, home = false }) => {
         </>
       );
     } else {
-      const disComm = post.comments.slice(0, 2);
       return (
         <>
           {post.comments &&
-            disComm.map((comment, i) => (
+            post.comments.slice(0, 2).map((comment, i) => (
               <li key={comment._id} className="photo__comment">
                 <span>{comment.user.username}</span> {comment.text}
                 <i className="fa ml fa-ellipsis-h"></i>
@@ -42,7 +41,6 @@ const PostActions = ({ post, home = false }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(comment)
     dispatch(addComment(post._id, comment));
   };
 
@@ -80,6 +78,13 @@ const PostActions = ({ post, home = false }) => {
         </div>
         <span className="photo__likes">{post.likes.length} likes</span>
         <ul className={`photo__comments ${!home && 'comm'}`}>
+          <p>
+            {home ? (
+              <Link to={`/post/${post._id}`}>View All Comments</Link>
+            ) : (
+              ''
+            )}
+          </p>
           {postComments(home)}
         </ul>
         <span className="photo__time-ago">2 hours ago</span>
@@ -92,7 +97,13 @@ const PostActions = ({ post, home = false }) => {
             name="comment"
             placeholder="Add a comment..."
           />
-          <span onClick={onSubmitHandler} className='mr-auto'>Post</span>
+          <span
+            onClick={onSubmitHandler}
+            style={{ cursor: 'pointer' }}
+            className="ml-auto"
+          >
+            Post
+          </span>
         </div>
       </div>
     </div>
