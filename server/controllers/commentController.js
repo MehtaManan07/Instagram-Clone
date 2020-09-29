@@ -18,6 +18,7 @@ exports.checkPostId = asyncHandler(async (req, res, next) => {
 // @desc     create a comment
 // @access   Private
 exports.newComment = asyncHandler(async (req, res, next) => {
+  console.log(req.body)
   if (!req.body.post) req.body.post = req.params.postId;
   if (!req.body.user) req.body.user = req.user._id;
 

@@ -33,9 +33,16 @@ export default (state = initialState, { type, payload }) => {
         error: null,
       };
 
+    case types.COMMENT_SUCCESS:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
+        loading: false,
+      };
+
     case types.LIKEPOST_SUCCESS:
     case types.UNLIKEPOST_SUCCESS:
-      console.log(state)
+      console.log(state);
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -50,6 +57,7 @@ export default (state = initialState, { type, payload }) => {
     case types.GET_POST_FAILURE:
     case types.LIKEPOST_FAILURE:
     case types.UNLIKEPOST_FAILURE:
+    case types.COMMENT_FAILURE:
       return {
         ...state,
         error: payload,

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost, unlikePost } from '../../redux/actions/postActions';
+import { useHistory } from 'react-router-dom';
+import { addComment } from '../../redux/actions/commentActions';
 
 const PostActions = ({ post, home = false }) => {
+  const [comment, setComment] = useState('');
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { user } = auth;
+  const history = useHistory();
 
   const postComments = (home) => {
     if (!home) {
@@ -36,6 +40,12 @@ const PostActions = ({ post, home = false }) => {
     }
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(comment)
+    dispatch(addComment(post._id, comment));
+  };
+
   return (
     <div>
       <div className="photo__info">
@@ -61,7 +71,10 @@ const PostActions = ({ post, home = false }) => {
               ></i>
             )}
           </span>
-          <span className="photo__action">
+          <span
+            onClick={() => history.push(`/post/${post._id}`)}
+            className="photo__action"
+          >
             <i className="fa fa-comment-o fa-lg"></i>
           </span>
         </div>
@@ -73,12 +86,13 @@ const PostActions = ({ post, home = false }) => {
         <div
           className={`photo__add-comment-container ${!home && 'commenting'}`}
         >
-          <textarea
-            active
+          <input
+            onChange={(e) => setComment(e.target.value)}
+            value={comment}
             name="comment"
             placeholder="Add a comment..."
-          ></textarea>
-          <i className="fa fa-ellipsis-h"></i>
+          />
+          <span onClick={onSubmitHandler} className='mr-auto'>Post</span>
         </div>
       </div>
     </div>

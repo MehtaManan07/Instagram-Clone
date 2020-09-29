@@ -69,7 +69,7 @@
   align-items: center;
 }
 
-.photo__add-comment-container textarea {
+.photo__add-comment-container input {
   width: 90%;
   border: 0;
   font-size: 14px;
@@ -77,8 +77,8 @@
   height: 20px;
 }
 
-.photo__add-comment-container textarea:focus,
-.photo__add-comment-container textarea:active {
+.photo__add-comment-container input:focus,
+.photo__add-comment-container input:active {
   outline: none;
 }
 
@@ -95,13 +95,14 @@
 }
 
 .commenting {
+  margin-top: 17px;
   display: flex;
   justify-content: space-between;
 }
 
 .comm {
   max-height: 275px;
-  margin: 20px 0;
+  margin: 20px 0 3px 0;
   padding-right: 17px;
   box-sizing: content-box;
   overflow-y: scroll;
