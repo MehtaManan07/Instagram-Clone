@@ -18,7 +18,15 @@ const PostActions = ({ post, home = false }) => {
           {post.comments &&
             post.comments.map((comment) => (
               <li key={comment._id} className="photo__comment">
-                <span className="">{comment.user.username}</span> {comment.text}
+                <span>
+                  <Link
+                    to={`/profile/${comment.user._id}`}
+                    className="text-secondary"
+                  >
+                    {comment.user.username}
+                  </Link>
+                </span>{' '}
+                {comment.text}
                 <i className="fa ml fa-ellipsis-h"></i>
               </li>
             ))}
