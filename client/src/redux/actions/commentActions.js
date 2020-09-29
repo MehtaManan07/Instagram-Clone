@@ -4,12 +4,10 @@ import axios from 'axios';
 import * as types from '../types';
 
 export const addComment = (postId, text) => async (dispatch) => {
-  alert(text);
   try {
-    const { data } = await axios.post(
-      `/api/v1/posts/${postId}/comments`,
-      {text},
-    );
+    const { data } = await axios.post(`/api/v1/posts/${postId}/comments`, {
+      text,
+    });
     dispatch({
       type: types.COMMENT_SUCCESS,
       payload: data.data,

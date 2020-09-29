@@ -25,6 +25,7 @@ const commentSchema = new mongoose.Schema({
 
 commentSchema.pre(/^find/, function (next) {
     this.populate('user', 'name username profileImage');
+    this.sort('-createdAt')
     next();
   });
   
