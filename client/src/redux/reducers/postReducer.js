@@ -37,7 +37,9 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         posts: state.posts.map((post) =>
-          post._id === payload.postId ? { ...post, comments: payload.comments } : post
+          post._id === payload.postId
+            ? { ...post, comments: payload.comments }
+            : post
         ),
         post: { ...state.post, comments: payload.comments },
         loading: false,
@@ -54,12 +56,23 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
 
+    case types.LIKE_COMMENT_SUCCESS:
+    case types.UNLIKE_COMMENT_SUCCESS:
+      console.log(state.post.comments);
+      return {
+        ...state,
+        
+        loading: false,
+      };
+
     case types.NEWPOST_FAILURE:
     case types.GET_ALL_FAILURE:
     case types.GET_POST_FAILURE:
     case types.LIKEPOST_FAILURE:
     case types.UNLIKEPOST_FAILURE:
     case types.COMMENT_FAILURE:
+    case types.LIKE_COMMENT_FAILURE:
+    case types.UNLIKE_COMMENT_FAILURE:
       return {
         ...state,
         error: payload,

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { likePost, unlikePost } from '../../redux/actions/postActions';
 import { Link, useHistory } from 'react-router-dom';
 import { addComment } from '../../redux/actions/commentActions';
+import CommentActions from './CommentActions';
 
 const PostActions = ({ post, home = false }) => {
   const [comment, setComment] = useState('');
@@ -27,6 +28,7 @@ const PostActions = ({ post, home = false }) => {
                   </Link>
                 </span>{' '}
                 {comment.text}
+                <CommentActions comment={comment} />
                 <i className="fa ml fa-ellipsis-h"></i>
               </li>
             ))}
@@ -47,7 +49,7 @@ const PostActions = ({ post, home = false }) => {
                   </Link>
                 </span>{' '}
                 {comment.text}
-                <i className="fa ml fa-ellipsis-h"></i>
+                <CommentActions comment={comment} />
               </li>
             ))}
         </>

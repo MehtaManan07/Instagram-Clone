@@ -52,7 +52,7 @@ exports.getComment = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: comment });
 });
 
-// @route    PUT api/v1/posts/like/:postId/:id
+// @route    PUT api/v1/posts/like/:id
 // @desc     like a comment
 // @access   Private
 exports.likeComment = asyncHandler(async (req, res, next) => {
@@ -74,7 +74,7 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
   res.json({ success: true, data: likedComment });
 });
 
-// @route    PUT api/v1/posts/unLike/:postId/:id
+// @route    PUT api/v1/posts/unLike/:id
 // @desc     unLike a comment
 // @access   Private
 exports.unLikeComment = asyncHandler(async (req, res, next) => {

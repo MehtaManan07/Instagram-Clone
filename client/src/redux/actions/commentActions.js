@@ -19,3 +19,34 @@ export const addComment = (postId, text) => async (dispatch) => {
     dispatch({ type: types.COMMENT_FAILURE, payload: displayErr });
   }
 };
+
+export const likeComment = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/v1/comments/like/${id}`);
+    console.log(data)
+    console.log(id)
+    dispatch({
+      type: types.LIKE_COMMENT_SUCCESS,
+      payload: {comment: data.data, id}
+    });
+  } catch (error) {
+    console.log(error);
+    const displayErr = error.response.data.error;
+    dispatch({ type: types.LIKE_COMMENT_FAILURE, payload: displayErr });
+  }
+};
+
+export const unlikeComment = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/v1/comments/unLike/${id}`);
+    console.log(data)
+    dispatch({
+      type: types.UNLIKE_COMMENT_SUCCESS,
+      payload: {comment: data.data, id}
+    });
+  } catch (error) {
+    console.log(error);
+    const displayErr = error.response.data.error;
+    dispatch({ type: types.UNLIKE_COMMENT_FAILURE, payload: displayErr });
+  }
+};
