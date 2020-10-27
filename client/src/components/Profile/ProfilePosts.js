@@ -9,7 +9,7 @@ const ProfilePost = ({ posts }) => {
           <h3 style={{ margin: '0 auto' }}> No posts yet </h3>
         ) : (
           posts.map((post) => (
-            <>
+            <React.Fragment key={post._id}>
               <div
                 onClick={() => history.push(`/post/${post._id}`)}
                 className="profile__photo"
@@ -65,7 +65,7 @@ const ProfilePost = ({ posts }) => {
           </span>
         </div>
       </div> */}
-            </>
+            </React.Fragment>
           ))
         )}
       </section>

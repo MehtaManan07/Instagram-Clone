@@ -23,7 +23,7 @@ const Profile = () => {
         <Loader />
       ) : (
         <>
-          <ProfileTop user={user.profile} />
+          <ProfileTop user={user.profile} id={id} />
           <section className="profile__photos">
             <ProfilePosts posts={user.profile.posts} />
           </section>

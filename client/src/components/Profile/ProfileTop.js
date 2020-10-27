@@ -1,9 +1,10 @@
 import React from 'react';
-
-const ProfileTop = ({ user }) => {
+import Loader from '../Loader'
+import TopButton from './TopButton';
+const ProfileTop = ({ user, id }) => {
   return (
     <div>
-    {user === null ? <></> : (
+    {user === null ? <Loader /> : (
 
       <header className="profile__header">
         <div className="profile__column">
@@ -12,7 +13,7 @@ const ProfileTop = ({ user }) => {
         <div className="profile__column">
           <div className="profile__title">
             <h3 className="profile__username">{user.username}</h3>
-            <span className="btn btn-outline-primary">Edit profile</span>
+            <TopButton id={id} />
             <i className="fa fa-cog fa-lg"></i>
           </div>
           <ul className="profile__stats">
