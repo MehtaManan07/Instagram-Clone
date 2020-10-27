@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const PostHeader = ({ post }) => {
   return (
     <div className="post_header">
-      <Link style={{ textDecoration: 'none' }} to={`/profile/${post.user._id}`}>
+      <Link style={{ textDecoration: 'none' }} to={`/profile/${post.user && post.user._id}`}>
         <img
           src={post.user.profileImage}
           style={{
